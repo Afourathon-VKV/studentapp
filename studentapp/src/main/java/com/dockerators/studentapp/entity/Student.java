@@ -9,6 +9,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+    @Column(name = "rollNo")
+    private String rollNo;
+
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -19,8 +22,9 @@ public class Student {
     public Student() {
     }
 
-    public Student(int id, String name, String email, String phone) {
+    public Student(int id, String rollNo, String name, String email, String phone) {
         this.id = id;
+        this.rollNo = rollNo;
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -32,6 +36,14 @@ public class Student {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(String rollNo) {
+        this.rollNo = rollNo;
     }
 
     public String getName() {
@@ -62,6 +74,7 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "id=" + id +
+                ", rollNo='" + rollNo + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
