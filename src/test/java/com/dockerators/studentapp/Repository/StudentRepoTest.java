@@ -33,7 +33,7 @@ public class StudentRepoTest {
     @AutoConfigureTestDatabase
     public void getStudentTest(){
         Student search_employee = studentRepository.findById(1).get();
-        Assertions.assertTrue((search_employee.getId()) == 1);
+        Assertions.assertEquals(1, (search_employee.getId()));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class StudentRepoTest {
     public void updateStudentTest(){
         Student employee = studentRepository.findById(1).get();
         employee.setEmail("ram@gmail.com");
-        Assertions.assertTrue((employee.getEmail()).equals("ram@gmail.com"));
+        Assertions.assertEquals("ram@gmail.com", (employee.getEmail()));
     }
 
 
@@ -66,7 +66,7 @@ public class StudentRepoTest {
         if(optionalEmployee.isPresent()){
             employee1 = optionalEmployee.get();
         }
-        Assertions.assertTrue(employee1 == null);
+        Assertions.assertNull(employee1);
     }
 
 }

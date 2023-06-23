@@ -2,6 +2,7 @@ package com.dockerators.studentapp.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
 @Entity
 @Table(name = "student")
 public class Student {
@@ -79,5 +80,20 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.getId()) &&
+                Objects.equals(email, student.getEmail()) &&
+                Objects.equals(rollNo, student.getRollNo()) &&
+                Objects.equals(name, student.getName()) &&
+                Objects.equals(phone, student.getPhone());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, rollNo, name, phone);
     }
 }
