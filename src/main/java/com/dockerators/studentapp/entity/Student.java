@@ -9,20 +9,22 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private int id; // Primary key of the student table to identify students
     @Column(name = "rollNo")
-    private String rollNo;
+    private String rollNo; // Roll number of the student
 
     @Column(name = "name")
-    private String name;
+    private String name; // Name of the student
     @Column(name = "email")
-    private String email;
+    private String email; // Email of the student
     @Column(name = "phone")
-    private String phone;
+    private String phone; // Phone number of the student
 
+    // No argument constructor
     public Student() {
     }
 
+    // All argument constructor
     public Student(int id, String rollNo, String name, String email, String phone) {
         this.id = id;
         this.rollNo = rollNo;
@@ -31,6 +33,7 @@ public class Student {
         this.phone = phone;
     }
 
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -71,6 +74,7 @@ public class Student {
         this.phone = phone;
     }
 
+    // Overridden toString() function to return in JSON {} format
     @Override
     public String toString() {
         return "Student{" +
@@ -81,6 +85,8 @@ public class Student {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+    // Overridden equals function : for controller level tests to mock service functionality
+    // Returns true if two objects have the same value for all fields
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -92,6 +98,9 @@ public class Student {
                 Objects.equals(name, student.getName()) &&
                 Objects.equals(phone, student.getPhone());
     }
+
+    // Used in the equals function
+    // Overridden to provide a consistent hash code for objects with equal field values.
     @Override
     public int hashCode() {
         return Objects.hash(id, email, rollNo, name, phone);
