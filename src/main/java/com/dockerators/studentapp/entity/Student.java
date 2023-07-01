@@ -8,16 +8,16 @@ import java.util.Objects;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private int id; // Primary key of the student table to identify students
-    @Column(name = "rollNo")
+    @Column(name = "rollNo", nullable = false)
     private String rollNo; // Roll number of the student
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name; // Name of the student
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email; // Email of the student
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false)
     private String phone; // Phone number of the student
 
     // No argument constructor

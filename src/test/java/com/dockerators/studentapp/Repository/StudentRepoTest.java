@@ -76,7 +76,7 @@ public class StudentRepoTest {
         // Retrieving a student with ID 1
         Student student = studentRepository.findById(1).get();
         // Deleting the student
-        studentRepository.delete(student);
+        studentRepository.deleteById(student.getId());
         // Verifying if the student has been deleted
         Student deletedStudent = null;
         Optional<Student> optionalStudent = studentRepository.findByEmail("ram@gmail.com");

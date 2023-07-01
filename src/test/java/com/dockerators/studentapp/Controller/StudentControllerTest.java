@@ -93,7 +93,7 @@ public class StudentControllerTest {
         Student student = new Student(1, "10", "John", "john@example.com", "123456789");
 
         // Mock the service method call
-        when(studentService.save(any(Student.class))).thenReturn(student);
+        when(studentService.updateStudent(student)).thenReturn(student);
 
         // Perform PUT request and validate the response
         mockMvc.perform(MockMvcRequestBuilders.put("/api/students")
@@ -105,29 +105,29 @@ public class StudentControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("123456789"));
 
         // Verify the service method call
-        Mockito.verify(studentService).save(student);
+        Mockito.verify(studentService).updateStudent(student);
     }
 
 
 
     @Test
     public void testDeleteStudent() throws Exception {
-        // Create a student for deletion
+        // Mock data
         int studentId = 1;
         Student student = new Student(studentId, "10", "John", "john@example.com", "123456789");
 
-        // Mock the service method calls
-        when(studentService.findById(studentId)).thenReturn(student);
-        doNothing().when(studentService).deleteById(studentId);
+        // Mock the service method call
+        when(studentService.deleteById(studentId)).thenReturn(student);
 
         // Perform DELETE request and validate the response
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/students/{student_id}", studentId)
-                        .contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/students/{student_id}", studentId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Deleted student id - " + studentId));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(studentId))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("John"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("john@example.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("123456789"));
 
-        // Verify the service method calls
-        Mockito.verify(studentService).findById(studentId);
+        // Verify the service method call
         Mockito.verify(studentService).deleteById(studentId);
     }
 

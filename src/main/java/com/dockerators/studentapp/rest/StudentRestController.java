@@ -29,11 +29,7 @@ public class StudentRestController {
     // Route to get the student that corresponds to a student id
     // The id is taken as a path variable
     public Student findById(@PathVariable int student_id) {
-        Student student = this.studentService.findById(student_id);
-        if (student == null) {
-            throw new RuntimeException("Student id not found - " + student_id);
-        }
-        return (student);
+        return (this.studentService.findById(student_id));
     }
 
 
@@ -49,19 +45,13 @@ public class StudentRestController {
     // Route to update a student
     // The student object is accepted in the request body
     public Student updateStudent(@RequestBody Student student) {
-        return (this.studentService.save(student));
+        return (this.studentService.updateStudent(student));
     }
 
     @DeleteMapping("/students/{student_id}")
     // Route to delete a student that corresponds to an id
     // The id of the student to be deleted is taken as a path variable
-    public String deleteStudent(@PathVariable int student_id) {
-        Student student = this.studentService.findById(student_id);
-
-        if(student == null) {
-            throw new RuntimeException("Student id not found - " + student_id);
-        }
-        this.studentService.deleteById(student_id);
-        return ("Deleted student id - " + student_id);
+    public Student deleteStudent(@PathVariable int student_id) {
+        return this.studentService.deleteById(student_id);
     }
 }
