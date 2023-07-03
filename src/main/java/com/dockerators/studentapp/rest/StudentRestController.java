@@ -2,6 +2,7 @@ package com.dockerators.studentapp.rest;
 
 import com.dockerators.studentapp.entity.Student;
 import com.dockerators.studentapp.service.StudentService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,6 +33,12 @@ public class StudentRestController {
         return (this.studentService.findById(student_id));
     }
 
+    @GetMapping("/students/rollNo/{rollNo}")
+    // Route to get the student that corresponds to a roll number
+    // The roll number is taken as a path variable
+    public Student findByRollNo(@PathVariable String rollNo){
+        return this.studentService.findByRollNo(rollNo);
+    }
 
     @PostMapping("/students")
     // Route to add a new student
@@ -53,5 +60,13 @@ public class StudentRestController {
     // The id of the student to be deleted is taken as a path variable
     public Student deleteStudent(@PathVariable int student_id) {
         return this.studentService.deleteById(student_id);
+    }
+
+    @Transactional
+    @DeleteMapping("/students/rollNo/{rollNo}")
+    // Route to get the student that corresponds to a roll number
+    // The roll number is taken as a path variable
+    public Student deleteByRollNo(@PathVariable String rollNo){
+        return this.studentService.deleteByRollNo(rollNo);
     }
 }

@@ -71,6 +71,23 @@ public class StudentControllerTest {
     }
 
     @Test
+    public void testGetStudentFromRollNo() throws Exception {
+        // Mock data
+        String rollNo = "1";
+        Student student = new Student(1,rollNo,"Paul", "paul@gmail.com","987654321");
+
+        // Mock the service method call
+        when(studentService.findByRollNo(rollNo)).thenReturn(student);
+
+        // Perform GET request and validate the response
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/students/rollNo/{rollNo}",rollNo)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Paul"));
+
+    }
+
+    @Test
     public void testAddStudent() throws Exception {
         // Mock data
         Student student = new Student(0, "10", "Paul", "paul@gmail.com", "987654321");
@@ -111,7 +128,7 @@ public class StudentControllerTest {
 
 
     @Test
-    public void testDeleteStudent() throws Exception {
+    public void testDeleteByIdStudent() throws Exception {
         // Mock data
         int studentId = 1;
         Student student = new Student(studentId, "10", "John", "john@example.com", "123456789");
@@ -129,6 +146,27 @@ public class StudentControllerTest {
 
         // Verify the service method call
         Mockito.verify(studentService).deleteById(studentId);
+    }
+
+    @Test
+    public void testDeleteByRollNoStudent() throws Exception {
+        // Mock data
+        String rollNo = "1";
+        Student student = new Student(1, rollNo, "John", "john@example.com", "123456789");
+
+        // Mock the service method call
+        when(studentService.deleteByRollNo(rollNo)).thenReturn(student);
+
+        // Perform DELETE request and validate the response
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/students/rollNo/{rollNo}", rollNo))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("John"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("john@example.com"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("123456789"));
+
+        // Verify the service method call
+        Mockito.verify(studentService).deleteByRollNo(rollNo);
     }
 
 }

@@ -50,6 +50,23 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    // Will return a student from the database that corresponds to an id
+    public Student findByRollNo(String rollNo) {
+        // May be null.
+        Optional<Student> result = this.studentRepository.findByRollNo(rollNo);
+        Student student;
+        if(result.isPresent()) {
+            student = result.get();
+            logger.info(String.format("Student with roll number %s was retrieved.", rollNo));
+            return(student);
+        }else{
+            // Will throw error if a student with that ID is not found
+            logger.error(String.format("Student with roll number %s was not found.", rollNo));
+            throw new StudentNotFoundException();
+        }
+    }
+
+    @Override
     public Student updateStudent(Student student) throws RuntimeException{
         try{
             Optional <Student> result = this.studentRepository.findByRollNo(student.getRollNo());
@@ -107,4 +124,20 @@ public class StudentServiceImpl implements StudentService {
             return b.get();
         }
     }
+
+    @Override
+    // Deletes a student that corresponds to a roll number
+    public Student deleteByRollNo(String rollNo) {
+        Optional<Student> b = this.studentRepository.findByRollNo(rollNo);
+        if (b.isEmpty()) {
+            // Will throw error if a student with that roll number does not exist
+            logger.error(String.format("Student with roll number %s doesn't exist and hence can't be deleted.", rollNo));
+            throw new StudentNotFoundException();
+        } else {
+            this.studentRepository.deleteByRollNo(rollNo);
+            logger.info(String.format("Student with roll number %s has been deleted.", rollNo));
+            return b.get();
+        }
+    }
+
 }

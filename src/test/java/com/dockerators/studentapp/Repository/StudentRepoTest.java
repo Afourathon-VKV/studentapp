@@ -35,16 +35,26 @@ public class StudentRepoTest {
     @Test
     @Order(2)
     @AutoConfigureTestDatabase
-    public void getStudentTest(){
+    public void getStudentByIdTest(){
         // Retrieving a student with ID 1
         Student search_student = studentRepository.findById(1).get();
         // Verifying if the retrieved student has the expected ID
         Assertions.assertEquals(1, search_student.getId());
     }
 
-    // Test to retrieve a list of students
     @Test
     @Order(3)
+    @AutoConfigureTestDatabase
+    public void getStudentByRollNoTest(){
+        // Retrieving a student with roll number 1
+        Student search_student = studentRepository.findByRollNo("1").get();
+        // Verifying if the retrieved student has the expected ID
+        Assertions.assertEquals(1, search_student.getId());
+    }
+
+    // Test to retrieve a list of students
+    @Test
+    @Order(4)
     @AutoConfigureTestDatabase
     public void getListOfStudentsTest(){
         // Retrieving all students
@@ -55,7 +65,7 @@ public class StudentRepoTest {
 
     // Test to update a student's email
     @Test
-    @Order(4)
+    @Order(5)
     @Rollback(value = false)
     @AutoConfigureTestDatabase
     public void updateStudentTest(){
@@ -70,13 +80,30 @@ public class StudentRepoTest {
 
     // Test to delete a student
     @Test
-    @Order(5)
+    @Order(6)
     @AutoConfigureTestDatabase
-    public void deleteStudentTest(){
+    public void deleteStudentByIdTest(){
         // Retrieving a student with ID 1
         Student student = studentRepository.findById(1).get();
         // Deleting the student
         studentRepository.deleteById(student.getId());
+        // Verifying if the student has been deleted
+        Student deletedStudent = null;
+        Optional<Student> optionalStudent = studentRepository.findByEmail("ram@gmail.com");
+        if(optionalStudent.isPresent()){
+            deletedStudent = optionalStudent.get();
+        }
+        Assertions.assertNull(deletedStudent);
+    }
+
+    @Test
+    @Order(6)
+    @AutoConfigureTestDatabase
+    public void deleteStudentByRollNoTest(){
+        // Retrieving a student with Roll No 1
+        Student student = studentRepository.findByRollNo("1").get();
+        // Deleting the student
+        studentRepository.deleteByRollNo(student.getRollNo());
         // Verifying if the student has been deleted
         Student deletedStudent = null;
         Optional<Student> optionalStudent = studentRepository.findByEmail("ram@gmail.com");

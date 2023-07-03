@@ -10,4 +10,6 @@ public interface StudentRepository extends JpaRepository <Student, Integer> {
     Optional<Student> findByEmail(String email);
     // JPA Repository Function to find the student with a given 'RollNo'.
     Optional<Student> findByRollNo(String rollNo);
+
+    void deleteByRollNo(String rollNo);
 }
