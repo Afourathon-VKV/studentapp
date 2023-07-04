@@ -8,8 +8,6 @@ import java.util.Optional;
 public interface StudentRepository extends JpaRepository <Student, Integer> {
     // JPA Repository Function to find all students by the property 'email'
     Optional<Student> findByEmail(String email);
-    // JPA Repository Function to find the student with a given 'RollNo'.
     Optional<Student> findByRollNo(String rollNo);
-
     void deleteByRollNo(String rollNo);
 }

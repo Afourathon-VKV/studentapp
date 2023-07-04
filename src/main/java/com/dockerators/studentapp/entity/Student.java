@@ -7,11 +7,8 @@ import java.util.Objects;
 @Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id; // Primary key of the student table to identify students
     @Column(name = "rollNo", nullable = false)
-    private String rollNo; // Roll number of the student
+    private String rollNo; // Roll number of the student -> Primary Key
 
     @Column(name = "name", nullable = false)
     private String name; // Name of the student
@@ -25,8 +22,7 @@ public class Student {
     }
 
     // All argument constructor
-    public Student(int id, String rollNo, String name, String email, String phone) {
-        this.id = id;
+    public Student(String rollNo, String name, String email, String phone) {
         this.rollNo = rollNo;
         this.name = name;
         this.email = email;
@@ -34,14 +30,6 @@ public class Student {
     }
 
     // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getRollNo() {
         return rollNo;
     }
@@ -78,7 +66,6 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
                 ", rollNo='" + rollNo + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
@@ -92,8 +79,7 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.getId()) &&
-                Objects.equals(email, student.getEmail()) &&
+        return Objects.equals(email, student.getEmail()) &&
                 Objects.equals(rollNo, student.getRollNo()) &&
                 Objects.equals(name, student.getName()) &&
                 Objects.equals(phone, student.getPhone());
@@ -103,6 +89,6 @@ public class Student {
     // Overridden to provide a consistent hash code for objects with equal field values.
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, rollNo, name, phone);
+        return Objects.hash(email, rollNo, name, phone);
     }
 }

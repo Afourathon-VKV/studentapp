@@ -20,7 +20,7 @@ public class ExceptionController {
 
     @ExceptionHandler(value = StudentNotFoundException.class)
     public ResponseEntity<Object> studentNotFound(StudentNotFoundException studentNotFoundException){
-        return new ResponseEntity<>("Student with that roll number/id not found",HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Student with that roll number not found",HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = StudentAlreadyExistsException.class)

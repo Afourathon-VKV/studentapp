@@ -25,36 +25,26 @@ public class StudentRepoTest {
     @Rollback(value = false)
     public void saveStudentTest(){
         // Creating a student object
-        Student student = new Student(1,"1","TestName","email@example.com","123456789");
+        Student student = new Student("1","TestName","email@example.com","123456789");
         studentRepository.save(student);
         // Verifying if the student object has been assigned an ID
-        Assertions.assertTrue(student.getId() > 0);
+        Assertions.assertSame("1", student.getRollNo());
     }
 
-    // Test to retrieve a student by ID
+    // Test to get student by roll number
     @Test
     @Order(2)
-    @AutoConfigureTestDatabase
-    public void getStudentByIdTest(){
-        // Retrieving a student with ID 1
-        Student search_student = studentRepository.findById(1).get();
-        // Verifying if the retrieved student has the expected ID
-        Assertions.assertEquals(1, search_student.getId());
-    }
-
-    @Test
-    @Order(3)
     @AutoConfigureTestDatabase
     public void getStudentByRollNoTest(){
         // Retrieving a student with roll number 1
         Student search_student = studentRepository.findByRollNo("1").get();
-        // Verifying if the retrieved student has the expected ID
-        Assertions.assertEquals(1, search_student.getId());
+        // Verifying if the retrieved student has the expected roll number
+        Assertions.assertEquals("1", search_student.getRollNo());
     }
 
     // Test to retrieve a list of students
     @Test
-    @Order(4)
+    @Order(3)
     @AutoConfigureTestDatabase
     public void getListOfStudentsTest(){
         // Retrieving all students
@@ -63,41 +53,24 @@ public class StudentRepoTest {
         Assertions.assertTrue(students.size() > 0);
     }
 
-    // Test to update a student's email
+    // Test to update a student
     @Test
-    @Order(5)
+    @Order(4)
     @Rollback(value = false)
     @AutoConfigureTestDatabase
     public void updateStudentTest(){
-        // Retrieving a student with ID 1
-        Student student = studentRepository.findById(1).get();
+        // Retrieving a student with roll number 1
+        Student student = studentRepository.findByRollNo("1").get();
         // Updating the student's email
         student.setEmail("ram@gmail.com");
         studentRepository.save(student);
         // Verifying if the student's email has been updated
-        Assertions.assertTrue(studentRepository.findById(1).get().getEmail().equals("ram@gmail.com"));
+        Assertions.assertEquals("ram@gmail.com", studentRepository.findByRollNo("1").get().getEmail());
     }
 
-    // Test to delete a student
+    // Test to delete a student by roll number
     @Test
-    @Order(6)
-    @AutoConfigureTestDatabase
-    public void deleteStudentByIdTest(){
-        // Retrieving a student with ID 1
-        Student student = studentRepository.findById(1).get();
-        // Deleting the student
-        studentRepository.deleteById(student.getId());
-        // Verifying if the student has been deleted
-        Student deletedStudent = null;
-        Optional<Student> optionalStudent = studentRepository.findByEmail("ram@gmail.com");
-        if(optionalStudent.isPresent()){
-            deletedStudent = optionalStudent.get();
-        }
-        Assertions.assertNull(deletedStudent);
-    }
-
-    @Test
-    @Order(6)
+    @Order(5)
     @AutoConfigureTestDatabase
     public void deleteStudentByRollNoTest(){
         // Retrieving a student with Roll No 1

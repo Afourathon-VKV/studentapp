@@ -38,8 +38,8 @@ public class StudentControllerTest {
     @Test
     public void testGetAllStudents() throws Exception {
         // Mock data
-        Student student1 = new Student(1,"10","Paul", "paul@gmail.com","987654321");
-        Student student2 = new Student(1,"20","Adams", "adams@gmail.com","123456789");
+        Student student1 = new Student("1","Paul", "paul@gmail.com","987654321");
+        Student student2 = new Student("2","Adams", "adams@gmail.com","123456789");
         List<Student> students = Arrays.asList(student1, student2);
 
         // Mock the service method call
@@ -55,26 +55,10 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testGetStudentFromID() throws Exception {
-        // Mock data
-        Student student = new Student(1,"10","Paul", "paul@gmail.com","987654321");
-
-        // Mock the service method call
-        when(studentService.findById(1)).thenReturn(student);
-
-        // Perform GET request and validate the response
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/students/1")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Paul"));
-
-    }
-
-    @Test
     public void testGetStudentFromRollNo() throws Exception {
         // Mock data
         String rollNo = "1";
-        Student student = new Student(1,rollNo,"Paul", "paul@gmail.com","987654321");
+        Student student = new Student(rollNo,"Paul", "paul@gmail.com","987654321");
 
         // Mock the service method call
         when(studentService.findByRollNo(rollNo)).thenReturn(student);
@@ -90,7 +74,7 @@ public class StudentControllerTest {
     @Test
     public void testAddStudent() throws Exception {
         // Mock data
-        Student student = new Student(0, "10", "Paul", "paul@gmail.com", "987654321");
+        Student student = new Student("10", "Paul", "paul@gmail.com", "987654321");
 
         // Mock the service method call
         when(studentService.save(student)).thenReturn(student);
@@ -107,7 +91,7 @@ public class StudentControllerTest {
     @Test
     public void testUpdateStudent() throws Exception {
         // Mock data
-        Student student = new Student(1, "10", "John", "john@example.com", "123456789");
+        Student student = new Student("10", "John", "john@example.com", "123456789");
 
         // Mock the service method call
         when(studentService.updateStudent(student)).thenReturn(student);
@@ -125,34 +109,11 @@ public class StudentControllerTest {
         Mockito.verify(studentService).updateStudent(student);
     }
 
-
-
-    @Test
-    public void testDeleteByIdStudent() throws Exception {
-        // Mock data
-        int studentId = 1;
-        Student student = new Student(studentId, "10", "John", "john@example.com", "123456789");
-
-        // Mock the service method call
-        when(studentService.deleteById(studentId)).thenReturn(student);
-
-        // Perform DELETE request and validate the response
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/students/{student_id}", studentId))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(studentId))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("John"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("john@example.com"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("123456789"));
-
-        // Verify the service method call
-        Mockito.verify(studentService).deleteById(studentId);
-    }
-
     @Test
     public void testDeleteByRollNoStudent() throws Exception {
         // Mock data
         String rollNo = "1";
-        Student student = new Student(1, rollNo, "John", "john@example.com", "123456789");
+        Student student = new Student(rollNo, "John", "john@example.com", "123456789");
 
         // Mock the service method call
         when(studentService.deleteByRollNo(rollNo)).thenReturn(student);
@@ -160,7 +121,6 @@ public class StudentControllerTest {
         // Perform DELETE request and validate the response
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/students/rollNo/{rollNo}", rollNo))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("John"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("john@example.com"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("123456789"));

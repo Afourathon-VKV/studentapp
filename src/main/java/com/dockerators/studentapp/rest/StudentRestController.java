@@ -26,13 +26,6 @@ public class StudentRestController {
         return (this.studentService.findAll());
     }
 
-    @GetMapping("/students/{student_id}")
-    // Route to get the student that corresponds to a student id
-    // The id is taken as a path variable
-    public Student findById(@PathVariable int student_id) {
-        return (this.studentService.findById(student_id));
-    }
-
     @GetMapping("/students/rollNo/{rollNo}")
     // Route to get the student that corresponds to a roll number
     // The roll number is taken as a path variable
@@ -44,7 +37,6 @@ public class StudentRestController {
     // Route to add a new student
     // The student object is accepted in the request body
     public Student addStudent(@RequestBody Student student) {
-        student.setId(0);      // To force an add, not an update.
         return (this.studentService.save(student));
     }
 
@@ -53,13 +45,6 @@ public class StudentRestController {
     // The student object is accepted in the request body
     public Student updateStudent(@RequestBody Student student) {
         return (this.studentService.updateStudent(student));
-    }
-
-    @DeleteMapping("/students/{student_id}")
-    // Route to delete a student that corresponds to an id
-    // The id of the student to be deleted is taken as a path variable
-    public Student deleteStudent(@PathVariable int student_id) {
-        return this.studentService.deleteById(student_id);
     }
 
     @Transactional
