@@ -42,9 +42,19 @@ public class StudentRepoTest {
         Assertions.assertEquals("1", search_student.getRollNo());
     }
 
-    // Test to retrieve a list of students
     @Test
     @Order(3)
+    @AutoConfigureTestDatabase
+    public void getNonPresentStudentTest(){
+        // Checking if a student with Roll number 2 is present
+        boolean isPresent = studentRepository.findByRollNo("2").isPresent();
+        // Verifying that the student with roll number 2 is not present
+        Assertions.assertFalse(isPresent);
+    }
+
+    // Test to retrieve a list of students
+    @Test
+    @Order(4)
     @AutoConfigureTestDatabase
     public void getListOfStudentsTest(){
         // Retrieving all students
@@ -55,7 +65,7 @@ public class StudentRepoTest {
 
     // Test to update a student
     @Test
-    @Order(4)
+    @Order(5)
     @Rollback(value = false)
     @AutoConfigureTestDatabase
     public void updateStudentTest(){
@@ -70,7 +80,7 @@ public class StudentRepoTest {
 
     // Test to delete a student by roll number
     @Test
-    @Order(5)
+    @Order(6)
     @AutoConfigureTestDatabase
     public void deleteStudentByRollNoTest(){
         // Retrieving a student with Roll No 1
