@@ -5,15 +5,7 @@
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "secretOptions": null,
-        "options": {
-          "awslogs-group": "/ecs/Student_App",
-          "awslogs-region": "ap-south-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
+      "logConfiguration": null,
       "entryPoint": [],
       "portMappings": [
         {
@@ -37,7 +29,7 @@
       "memoryReservation": 512,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:b3618fac74a1897d5d29878d0134325c367b1acf",
+      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:8cb49083880859ae70135dd540f77a71f8f0597c",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -64,32 +56,14 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:12",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:22",
   "family": "Student_App",
   "requiresAttributes": [
     {
       "targetId": null,
       "targetType": null,
       "value": null,
-      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "ecs.capability.execution-role-awslogs"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
       "name": "com.amazonaws.ecs.capability.ecr-auth"
-    },
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "targetId": null,
@@ -117,7 +91,7 @@
   "networkMode": "bridge",
   "runtimePlatform": null,
   "cpu": null,
-  "revision": 12,
+  "revision": 22,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
