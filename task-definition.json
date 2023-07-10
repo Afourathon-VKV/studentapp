@@ -6,7 +6,7 @@
       "dnsSearchDomains": null,
       "environmentFiles": null,
       "logConfiguration": null,
-      "entryPoint": [],
+      "entryPoint": null,
       "portMappings": [
         {
           "hostPort": 80,
@@ -14,7 +14,7 @@
           "containerPort": 8080
         }
       ],
-      "command": [],
+      "command": null,
       "linuxParameters": null,
       "cpu": 0,
       "environment": [],
@@ -29,7 +29,7 @@
       "memoryReservation": 512,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:8cb49083880859ae70135dd540f77a71f8f0597c",
+      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:bb51dc81de076280f20e11ee9d5b6e60d0f8aead",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -56,7 +56,7 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:22",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:24",
   "family": "Student_App",
   "requiresAttributes": [
     {
@@ -91,7 +91,7 @@
   "networkMode": "bridge",
   "runtimePlatform": null,
   "cpu": null,
-  "revision": 22,
+  "revision": 24,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
