@@ -5,8 +5,16 @@
     {
       "dnsSearchDomains": null,
       "environmentFiles": null,
-      "logConfiguration": null,
-      "entryPoint": null,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/Student_App",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "entryPoint": [],
       "portMappings": [
         {
           "hostPort": 80,
@@ -14,7 +22,7 @@
           "containerPort": 8080
         }
       ],
-      "command": null,
+      "command": [],
       "linuxParameters": null,
       "cpu": 0,
       "environment": [],
@@ -29,7 +37,7 @@
       "memoryReservation": 512,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:bb51dc81de076280f20e11ee9d5b6e60d0f8aead",
+      "image": "760022656493.dkr.ecr.ap-south-1.amazonaws.com/studentapp:4a104b808d5ca605a24066bccd35fbe3605e9d95",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -56,14 +64,32 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:24",
+  "taskDefinitionArn": "arn:aws:ecs:ap-south-1:760022656493:task-definition/Student_App:28",
   "family": "Student_App",
   "requiresAttributes": [
     {
       "targetId": null,
       "targetType": null,
       "value": null,
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
       "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
     },
     {
       "targetId": null,
@@ -91,7 +117,7 @@
   "networkMode": "bridge",
   "runtimePlatform": null,
   "cpu": null,
-  "revision": 24,
+  "revision": 28,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
