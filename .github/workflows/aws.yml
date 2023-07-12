@@ -63,6 +63,10 @@ jobs:
 
       - name: Adding application.properties file
         run: |
+          touch src/main/resources/application.properties
+
+      - name: Adding content to application.properties file
+        run: |
           echo -e "spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect\nspring.jpa.generate-ddl=true\nspring.jpa.hibernate.ddl-auto=update\nlogging.level.org.hibernate.SQL=DEBUG\nlogging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE\nspring.datasource.url=jdbc:mysql://testdb.cexyawksi36z.ap-south-1.rds.amazonaws.com:3306/student_directory\nspring.datasource.username=admin\nspring.datasource.password=$DEV_PROP_FILE" > src/main/resources/application.properties
           cat src/main/resources/application.properties
         shell: bash
